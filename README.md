@@ -66,6 +66,31 @@ Average glucose values are rounded to one decimal place.
 - Edit and delete actions.
 - Summary statistics.
 - Reports section.
+  
+
+
+---
+
+## Application Screenshots
+
+### 1. Login Page
+![Login Page](docs/screenshots/01-login.png)
+
+### 2. Registration Page
+![Registration Page](docs/screenshots/02-register.png)
+
+### 3. Dashboard
+![Dashboard](docs/screenshots/03-dashboard.png)
+
+
+
+### 4. Daily Report
+![Daily Report](docs/screenshots/04-daily-report.png)
+
+### 5. Monthly Reports
+![Monthly Reports](docs/screenshots/05-monthly-reports.png)
+
+---
 
 ---
 
