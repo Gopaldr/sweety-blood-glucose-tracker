@@ -1,5 +1,146 @@
 
-/* Dashboard */
+/* ================================
+   GLOBAL STYLES
+================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #263445;
+    min-height: 100vh;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    border: none;
+    border-radius: 7px;
+    padding: 11px 18px;
+    background: #2878d0;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+button:hover {
+    background: #1d5fa9;
+}
+
+input,
+select {
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #2878d0 !important;
+    box-shadow: 0 0 0 3px rgba(40, 120, 208, 0.12);
+}
+
+/* ================================
+   LOGIN AND REGISTER
+================================ */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    background: linear-gradient(135deg, #eaf3ff, #f5f8fc);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 430px;
+    background: white;
+    padding: 38px;
+    border-radius: 16px;
+    box-shadow: 0 8px 35px rgba(30, 70, 110, 0.12);
+}
+
+.auth-card h1 {
+    text-align: center;
+    color: #245b91;
+    margin-bottom: 10px;
+}
+
+.auth-card p {
+    text-align: center;
+    color: #687783;
+    margin-bottom: 25px;
+}
+
+.auth-card label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #34465a;
+}
+
+.auth-card input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccd5df;
+    border-radius: 8px;
+    margin-bottom: 18px;
+}
+
+.auth-card button {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.auth-footer {
+    margin-top: 22px;
+    text-align: center;
+    color: #687783;
+}
+
+.auth-footer a {
+    color: #2878d0;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ================================
+   ERROR AND SUCCESS MESSAGES
+================================ */
+
+.error-message {
+    padding: 12px;
+    background: #fdeaea;
+    color: #bd3030;
+    border-radius: 7px;
+    margin-bottom: 15px;
+}
+
+.success-message {
+    padding: 12px;
+    background: #e5f7eb;
+    color: #207a40;
+    border-radius: 7px;
+    margin-bottom: 15px;
+}
+
+/* ================================
+   DASHBOARD
+================================ */
 
 .dashboard-container {
     max-width: 1150px;
@@ -48,7 +189,8 @@
 
 .reading-form-section,
 .summary-section,
-.readings-section {
+.readings-section,
+.reports-section {
     background: white;
     padding: 25px;
     border-radius: 12px;
@@ -85,6 +227,10 @@
 
 .secondary-button {
     background: #687783;
+}
+
+.secondary-button:hover {
+    background: #52616d;
 }
 
 .summary-grid {
@@ -163,6 +309,10 @@ th {
     padding: 8px 12px;
 }
 
+.delete-button:hover {
+    background: #b52f2f;
+}
+
 .empty-state {
     text-align: center;
     padding: 35px 15px;
@@ -174,56 +324,9 @@ th {
     color: #245b91;
 }
 
-.success-message {
-    padding: 12px;
-    background: #e5f7eb;
-    color: #207a40;
-    border-radius: 7px;
-    margin-bottom: 15px;
-}
-
-@media (max-width: 800px) {
-    .reading-form {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .summary-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media (max-width: 550px) {
-    .dashboard-header,
-    .readings-heading {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .user-section {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .reading-form,
-    .summary-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .form-actions {
-        align-items: stretch;
-        flex-direction: column;
-    }
-}
-
-/* Reports */
-
-.reports-section {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.04);
-}
+/* ================================
+   REPORTS
+================================ */
 
 .reports-section h2 {
     color: #245b91;
@@ -266,6 +369,10 @@ th {
     color: #245b91;
 }
 
+.report-tabs button:hover {
+    background: #d5e5f6;
+}
+
 .report-tabs button.active-tab {
     background: #2878d0;
     color: white;
@@ -299,7 +406,25 @@ th {
     color: #687783;
 }
 
+/* ================================
+   RESPONSIVE DESIGN
+================================ */
+
+@media (max-width: 800px) {
+    .reading-form {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 @media (max-width: 600px) {
+    .auth-card {
+        padding: 25px;
+    }
+
     .report-controls {
         align-items: stretch;
         flex-direction: column;
@@ -314,3 +439,36 @@ th {
     }
 }
 
+@media (max-width: 550px) {
+    .dashboard-container {
+        padding: 12px;
+    }
+
+    .dashboard-header,
+    .readings-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .user-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .reading-form,
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .reading-form-section,
+    .summary-section,
+    .readings-section,
+    .reports-section {
+        padding: 17px;
+    }
+}
