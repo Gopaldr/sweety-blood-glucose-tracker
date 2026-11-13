@@ -1,610 +1,442 @@
-\# Sweety – Blood Glucose Tracker
+# Sweety – Blood Glucose Tracker
 
+A full-stack web application that allows users to securely record, manage, and monitor their blood glucose readings. Sweety provides daily and monthly reports to help users understand their glucose reading history through a simple and user-friendly dashboard.
 
+## Features
 
-A full-stack blood glucose tracking application built using React, Node.js, Express, and PostgreSQL.
+### 1. User Authentication
+- User registration with name, email, and password.
+- Secure password hashing using bcrypt.
+- User login with JWT authentication.
+- Protected API routes.
+- Users can access only their own glucose readings.
 
+### 2. Blood Glucose Reading Management
+- Add new blood glucose readings.
+- View previously recorded readings.
+- Update existing readings.
+- Delete readings.
+- Select a date and time slot for each reading.
 
+The application supports four daily reading slots:
 
-\## Features
+- Morning (fasting)
+- After breakfast
+- After lunch
+- After dinner
 
+### 3. Reading Validation
 
+The application implements the following validation rules:
 
-\### Authentication
-
-\- User registration and login
-
-\- Password hashing using bcrypt
-
-\- JWT-based authentication
-
-\- Protected API routes
-
-
-
-\### Glucose Reading Management
-
-\- Add, view, update, and delete glucose readings
-
-\- Four daily time slots:
-
-&#x20; - Morning (fasting)
-
-&#x20; - After breakfast
-
-&#x20; - After lunch
-
-&#x20; - After dinner
-
-\- Glucose values restricted to whole numbers between 40 and 600 mg/dl
-
-\- One reading per time slot per day
-
-\- Maximum of four readings per day
-
-\- Future-date validation
-
-\- User-specific reading access
-
-
-
-\### Reports
-
-\- Daily report
-
-\- Month-to-date report
-
-\- Previous-month report
-
-\- Highest, lowest, average, and total reading statistics
-
-\- Daily breakdown for monthly reports
-
-\- Empty-state messages when no readings exist
-
-
-
-\## Technology Stack
-
-
-
-| Layer | Technology |
-
+| Validation | Error Message |
 |---|---|
+| Empty glucose value | Please enter a glucose value. |
+| Value outside 40–600 mg/dl | Value must be between 40 and 600 mg/dl. |
+| Duplicate time slot | You already have a reading for this date and time slot. |
+| More than four readings per day | You can add only 4 readings per day. |
+| Future reading date | Date cannot be in the future. |
 
-| Frontend | React, Vite |
+Additional database constraints prevent duplicate readings for the same user, date, and time slot.
 
-| Routing | React Router |
+### 4. Reports and Statistics
 
-| API requests | Axios |
+The application provides three reporting periods:
 
-| Backend | Node.js, Express |
+**Daily Report**
+- View readings for a selected date.
+- Display individual reading values and time slots.
+- Calculate highest, lowest, and average glucose values.
+- Display the total number of readings.
 
-| Database | PostgreSQL |
+**Month-to-Date Report**
+- Displays readings from the first day of the selected month through the selected date.
+- Provides highest, lowest, average, and total reading statistics.
 
-| Authentication | JWT |
+**Monthly Report**
+- Displays statistics for the complete previous calendar month.
+- Provides highest, lowest, average, and total reading statistics.
 
-| Password security | bcrypt |
+Average glucose values are rounded to one decimal place.
 
-| Development | Nodemon |
+### 5. Dashboard
+- User-friendly dashboard.
+- Blood glucose reading entry form.
+- Reading history.
+- Edit and delete actions.
+- Summary statistics.
+- Reports section.
 
+---
 
+## Technology Stack
 
-\## Project Structure
+### Frontend
+- React.js
+- JavaScript
+- HTML5
+- CSS3
+- Vite
+- Axios
+- React Router
 
+### Backend
+- Node.js
+- Express.js
+- REST API
+- JSON Web Tokens (JWT)
+- bcrypt
+
+### Database
+- PostgreSQL
+
+### Development Tools
+- Visual Studio Code
+- Git
+- GitHub
+- Postman
+- PowerShell
+
+---
+
+## Project Structure
 
 
 sweety-blood-glucose-tracker/
-
 │
-
 ├── client/
-
+│   ├── public/
 │   ├── src/
-
-│   │   ├── components/
-
 │   │   ├── pages/
-
-│   │   │   ├── Login.jsx
-
-│   │   │   ├── Register.jsx
-
-│   │   │   ├── Dashboard.jsx
-
-│   │   │   └── Reports.jsx
-
 │   │   ├── services/
-
-│   │   │   └── api.js
-
 │   │   ├── App.jsx
-
 │   │   ├── main.jsx
-
 │   │   └── index.css
-
 │   ├── .env.example
-
-│   └── package.json
-
+│   ├── package.json
+│   └── vite.config.js
 │
-
 ├── server/
-
 │   ├── config/
-
 │   │   └── db.js
-
 │   ├── controllers/
-
 │   │   ├── authController.js
-
 │   │   ├── readingController.js
-
 │   │   └── reportController.js
-
 │   ├── middleware/
-
 │   │   └── authMiddleware.js
-
 │   ├── routes/
-
 │   │   ├── authRoutes.js
-
 │   │   ├── readingRoutes.js
-
 │   │   └── reportRoutes.js
-
 │   ├── scripts/
-
 │   │   └── seed.js
-
+│   ├── tests/
 │   ├── .env.example
-
 │   ├── app.js
-
-│   └── server.js
-
+│   ├── server.js
+│   └── package.json
 │
-
+├── database/
+│   └── schema.sql
+│
 ├── .gitignore
-
 └── README.md
 
 
+---
+
+## Getting Started
+
+Follow these instructions to run the project locally.
+
+### Prerequisites
+
+Install the following software:
+
+- Node.js
+- npm
+- PostgreSQL
+- Git
+
+### 1. Clone the Repository
 
 
-
-\## Prerequisites
-
+git clone https://github.com/Gopaldr/sweety-blood-glucose-tracker.git
 
 
-Install the following:
+Navigate to the project directory:
 
-
-
-\- Node.js and npm
-
-\- PostgreSQL
-
-\- Git
-
-
-
-\## Installation and Setup
-
-
-
-\### 1. Clone the repository
-
-
-
-
-
-git clone https://github.com/YOUR\_USERNAME/sweety-blood-glucose-tracker.git
 
 cd sweety-blood-glucose-tracker
 
 
+### 2. Set Up PostgreSQL Database
 
+Start your PostgreSQL service.
 
+Open PostgreSQL or PowerShell and create the database:
 
-\### 2. Create the PostgreSQL database
+CREATE DATABASE sweety_db;
 
 
+Navigate to the project root directory and execute the schema file:
 
-Open PostgreSQL and execute:
+psql -U postgres -d sweety_db -f database/schema.sql
 
 
+The schema creates the following tables:
 
+**users**
+- id
+- name
+- email
+- password_hash
+- created_at
 
+**readings**
+- id
+- user_id
+- reading_date
+- time_slot
+- glucose_value
+- created_at
+- updated_at
 
-CREATE DATABASE sweety\_db;
+The database also includes:
+- Primary key constraints.
+- Foreign key relationship between users and readings.
+- Unique email constraint.
+- Glucose value constraint (40–600).
+- Valid time-slot constraint.
+- Unique user/date/time-slot constraint.
+- Index for user and reading date queries.
 
+### 3. Configure Backend Environment
 
-
-
-
-Connect to `sweety\_db` and create the tables:
-
-
-
-
-
-CREATE TABLE users (
-
-&#x20;   id SERIAL PRIMARY KEY,
-
-&#x20;   name VARCHAR(100) NOT NULL,
-
-&#x20;   email VARCHAR(255) UNIQUE NOT NULL,
-
-&#x20;   password\_hash TEXT NOT NULL,
-
-&#x20;   created\_at TIMESTAMPTZ DEFAULT NOW()
-
-);
-
-
-
-CREATE TABLE readings (
-
-&#x20;   id SERIAL PRIMARY KEY,
-
-&#x20;   user\_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-
-&#x20;   reading\_date DATE NOT NULL,
-
-&#x20;   time\_slot VARCHAR(30) NOT NULL
-
-&#x20;       CHECK (time\_slot IN (
-
-&#x20;           'Morning (fasting)',
-
-&#x20;           'After breakfast',
-
-&#x20;           'After lunch',
-
-&#x20;           'After dinner'
-
-&#x20;       )),
-
-&#x20;   glucose\_value INTEGER NOT NULL
-
-&#x20;       CHECK (glucose\_value BETWEEN 40 AND 600),
-
-&#x20;   created\_at TIMESTAMPTZ DEFAULT NOW(),
-
-&#x20;   updated\_at TIMESTAMPTZ DEFAULT NOW(),
-
-&#x20;   UNIQUE (user\_id, reading\_date, time\_slot)
-
-);
-
-
-
-CREATE INDEX idx\_readings\_user\_date
-
-ON readings(user\_id, reading\_date);
-
-
-
-
-
-\### 3. Configure the backend
-
-
-
-Copy `server/.env.example` to `server/.env`.
-
-
-
-Update the PostgreSQL password and generate a secure JWT secret.
-
-
-
-Install backend dependencies:
-
-
-
+Navigate to the server directory:
 
 
 cd server
 
-npm install
 
+Create your local environment file:
 
 
+Copy-Item .env.example .env
 
 
-Start the backend:
+Open the file:
 
 
+notepad .env
 
 
+Configure your PostgreSQL credentials and a strong JWT secret:
 
-npm run dev
 
+PORT=5000
 
+DB_USER=postgres
+DB_HOST=localhost
+DB_NAME=sweety_db
+DB_PASSWORD=your_postgresql_password
+DB_PORT=5432
 
-Backend URL:
+JWT_SECRET=your_long_random_secret
 
+CLIENT_URL=http://localhost:5173
 
 
-`http://localhost:5000`
+Replace the example database password and JWT secret with your own local values.
 
-
-
-Health check:
-
-
-
-`http://localhost:5000/api/health`
-
-
-
-\### 4. Configure the frontend
-
-
-
-Open another terminal:
-
-
-
-
-
-cd client
-
-
-
-
-
-Copy `client/.env.example` to `client/.env`.
-
-
-
-Install frontend dependencies:
-
-
-
-
-
-npm install
-
-
-
-
-
-Start the frontend:
-
-
-
-
-
-npm run dev
-
-
-
-
-
-Frontend URL:
-
-
-
-`http://localhost:5173`
-
-
-
-\### 5. Seed demo data
-
-
+### 4. Install Backend Dependencies
 
 From the server directory:
 
 
+npm install
 
+
+### 5. Start the Backend Server
+
+
+npm run dev
+
+
+Expected output:
+
+
+PostgreSQL connected successfully!
+Sweety API running on port 5000
+
+
+Backend health-check endpoint:
+
+http://localhost:5000/api/health
+
+
+### 6. Configure Frontend Environment
+
+Open another PowerShell window.
+
+Navigate to the client directory:
+
+
+cd C:\Users\gopal\Documents\sweety-blood-glucose-tracker\client
+
+
+Create the frontend environment file:
+
+
+Copy-Item .env.example .env
+
+
+The frontend environment file should contain:
+
+
+VITE_API_URL=http://localhost:5000/api
+
+
+### 7. Install Frontend Dependencies
+
+
+npm install
+
+
+### 8. Start the Frontend
+
+
+npm run dev
+
+
+Vite displays the local frontend URL. Open the URL shown in your terminal.
+
+Usually:
+
+
+http://localhost:5173
+
+
+If port 5173 is already in use, Vite may select another port, such as 5174.
+
+Keep both backend and frontend terminals running.
+
+---
+
+## API Endpoints
+
+All API endpoints are prefixed with:
+
+
+http://localhost:5000/api
+
+
+### Authentication APIs
+
+| Method | Endpoint | Description | Authentication |
+|---|---|---|---|
+| POST | /auth/register | Register a new user | No |
+| POST | /auth/login | Authenticate user | No |
+| GET | /auth/me | Get authenticated user details | Yes |
+
+### Blood Glucose Reading APIs
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | /readings | Retrieve readings |
+| POST | /readings | Add a reading |
+| PUT | /readings/:id | Update a reading |
+| DELETE | /readings/:id | Delete a reading |
+
+All reading endpoints require JWT authentication.
+
+### Reporting APIs
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | /reports/daily | Daily glucose report |
+| GET | /reports/month-to-date | Month-to-date report |
+| GET | /reports/monthly | Previous calendar month report |
+
+All reporting endpoints require JWT authentication.
+
+---
+
+## Security Implementation
+
+The application includes the following security measures:
+
+- Password hashing using bcrypt.
+- JWT-based authentication.
+- Protected backend routes.
+- User-specific reading access.
+- Database constraints to maintain data integrity.
+- Parameterized SQL queries.
+- Environment variables for sensitive configuration.
+- Password hashes are stored instead of plain-text passwords.
+
+---
+
+## Testing
+
+The application can be tested through the following workflows:
+
+1. Register a new user.
+2. Log in with registered credentials.
+3. Add a blood glucose reading.
+4. Verify that the reading appears in the dashboard.
+5. Update an existing reading.
+6. Delete a reading.
+7. Try entering an invalid glucose value.
+8. Try adding a duplicate time slot for the same date.
+9. Try adding more than four readings in one day.
+10. Check daily, month-to-date, and monthly reports.
+11. Verify that one user cannot access another user's readings.
+
+---
+
+## Database Seeding
+
+The backend includes a seed script to populate the database with demonstration data.
+
+From the server directory, run:
 
 
 npm run seed
 
 
+The script creates a demo user and sample glucose readings.
 
+Use the demo credentials printed by the seed script for local demonstration only. Change the demo password before using the application in any publicly accessible environment.
 
+---
 
-Demo account:
+## Future Improvements
 
+The following features can be considered for future development:
 
+- Interactive glucose trend charts.
+- Export reports as PDF or CSV.
+- Medication and meal tracking.
+- Custom date-range reports.
+- Email notifications and reminders.
+- Deployment to a cloud hosting platform.
+- Automated backend and frontend testing.
+- Improved accessibility and user experience.
 
-\- Email: `demo@sweety.com`
+---
 
-\- Password: `SweetyDemo@123`
+## Author
 
+**Gopal Reddy Desireddy**
 
+GitHub: [Gopaldr](https://github.com/Gopaldr)
 
-Use this account only for local demonstration.
+Project Repository: [Sweety – Blood Glucose Tracker](https://github.com/Gopaldr/sweety-blood-glucose-tracker)
 
+---
 
+## License
 
-\## API Endpoints
-
-
-
-\### Authentication
-
-
-
-| Method | Endpoint | Description |
-
-|---|---|---|
-
-| POST | `/api/auth/register` | Register a user |
-
-| POST | `/api/auth/login` | Log in |
-
-| GET | `/api/auth/me` | Get authenticated user |
-
-
-
-\### Glucose Readings
-
-
-
-All reading endpoints require a valid JWT.
-
-
-
-| Method | Endpoint | Description |
-
-|---|---|---|
-
-| POST | `/api/readings` | Create a reading |
-
-| GET | `/api/readings` | Get readings |
-
-| PUT | `/api/readings/:id` | Update a reading |
-
-| DELETE | `/api/readings/:id` | Delete a reading |
-
-
-
-\### Reports
-
-
-
-All report endpoints require a valid JWT.
-
-
-
-| Method | Endpoint | Description |
-
-|---|---|---|
-
-| GET | `/api/reports/daily?date=YYYY-MM-DD` | Daily report |
-
-| GET | `/api/reports/month-to-date?date=YYYY-MM-DD` | Month-to-date report |
-
-| GET | `/api/reports/monthly?date=YYYY-MM-DD` | Previous-month report |
-
-
-
-\## Validation Rules
-
-
-
-\- Glucose value is required.
-
-\- Glucose value must be a whole number from 40 to 600 mg/dl.
-
-\- Only one reading is allowed per time slot per day.
-
-\- A maximum of four readings is allowed per day.
-
-\- Future dates are not accepted.
-
-\- Users can only access their own readings and reports.
-
-
-
-\## Testing
-
-
-
-Manually verify the following workflows:
-
-
-
-1\. User registration and login.
-
-2\. Unauthorized access to protected endpoints.
-
-3\. Add and retrieve glucose readings.
-
-4\. Update and delete readings.
-
-5\. Reject duplicate time-slot readings.
-
-6\. Reject invalid glucose values.
-
-7\. Reject future dates.
-
-8\. Verify daily report calculations.
-
-9\. Verify month-to-date report.
-
-10\. Verify previous-month report.
-
-11\. Verify the empty-report state.
-
-12\. Verify that one user cannot access another user's readings.
-
-
-
-\## Notes, Assumptions, and Future Improvements
-
-
-
-\### Assumptions
-
-\- Dates are interpreted using the application's configured India time zone (Asia/Kolkata) for future-date validation.
-
-\- Each of the four specified time slots can have at most one reading per day.
-
-\- Reports are generated for the authenticated user only.
-
-\- Monthly reports cover the complete previous calendar month relative to the selected date.
-
-
-
-\### Future Improvements
-
-\- Add pagination for large reading histories.
-
-\- Add glucose trend charts.
-
-\- Add automated frontend and backend test suites.
-
-\- Add Docker support.
-
-\- Add caching for frequently requested reports.
-
-\- Add scheduled background jobs for notifications.
-
-\- Introduce a doctor role and secure patient-sharing workflow.
-
-
-
-\## Security
-
-
-
-\- Passwords are hashed with bcrypt.
-
-\- JWT authentication protects private endpoints.
-
-\- Database queries use parameterized SQL.
-
-\- User-specific data is filtered using the authenticated user ID.
-
-\- Environment files containing secrets are excluded from Git.
-
-
-
-\## Author
-
-
-
-Gopal Reddy Desireddy
-
-
-
-GitHub: https://github.com/Gopaldr
-
-
-
-
-
-
-
-\*\*Project:\*\* Sweety – Blood Glucose Tracker
-
+This project is developed for learning and demonstration purposes. A formal open-source license can be added separately if the project is intended for public reuse.
